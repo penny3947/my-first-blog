@@ -28,7 +28,7 @@ def getChgRate(in_val):
     APIkey = 'a6w51v3PEJEhlv2BeW6iXpTfSBygESpB'
     rateDict = {}
 
-    if not in_val:
+    if not in_val or in_val["year"] == "0000":      # 초기값일 경우 아무처리 없이 바로 응답
         return rateDict
 
     target_period = in_val["year"] + in_val["month"]
