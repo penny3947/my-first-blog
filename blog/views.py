@@ -1,12 +1,11 @@
 from django.shortcuts import render
 from .forms import InputForm
+from .getChgRate import getChgRate as gcr
 
 
 # Create your views here.
-def post_list(request):
+def rate_list(request):
     if request.method == "POST":
-        #print(request.years)
-        print("POST")
         form = InputForm(request.POST)
         if form.is_valid():
             year = form.cleaned_data["years"]
@@ -15,4 +14,5 @@ def post_list(request):
     else:
         form = InputForm()
 
-    return render(request, 'blog/post_list.html', {})
+    gcr(year+month)
+    return render(request, 'blog/rate_list.html', {})
