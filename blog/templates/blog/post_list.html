@@ -10,30 +10,31 @@
     </div>
 
     <div class="search">
-        <form action="">
+        <form action="" method="POST" >{% csrf_token %}
+            {{ form }}
             <ul class="filter-row">
                 <li>
                     <label for="years">조회연도</label>
                     <div class="filter-list" style="width: 125px;">
-                        <select name="" id="years">
+                        <select name="years" id="years">
                             <option value="" disabled selected>선택하세요</option>
-                            <option value="1">2019</option>
-                            <option value="2">2018</option>
-                            <option value="3">2017</option>
-                            <option value="4">2016</option>
-                            <option value="5">2015</option>
-                            <option value="6">2014</option>
-                            <option value="7">2013</option>
-                            <option value="8">2012</option>
-                            <option value="9">2011</option>
-                            <option value="10">2010</option>
+                            <option value="2019">2019</option>
+                            <option value="2018">2018</option>
+                            <option value="2017">2017</option>
+                            <option value="2016">2016</option>
+                            <option value="2015">2015</option>
+                            <option value="2014">2014</option>
+                            <option value="2013">2013</option>
+                            <option value="2012">2012</option>
+                            <option value="2011">2011</option>
+                            <option value="2010">2010</option>
                         </select>
                     </div>
                 </li>
                 <li>
                     <label for="months">조회월</label>
                     <div class="filter-list" style="width: 125px;">
-                        <select name="" id="months">
+                        <select name="months" id="months">
                             <option value="" disabled selected>선택하세요</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
