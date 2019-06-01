@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .forms import InputForm
-from .getChgRate import getChgRate as gcr
+from .getChgRate import get_chg_rate, draw_rate
 
 
 # Create your views here.
@@ -15,5 +15,7 @@ def rate_list(request):
     else:
         form = InputForm()
 
-    gcr(in_val)
+    out_val = get_chg_rate(in_val)
+    #draw_rate(out_val, in_val["curr"])
+
     return render(request, 'blog/rate_list.html', {})
