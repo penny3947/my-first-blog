@@ -1,24 +1,28 @@
 import requests
 import datetime
 
-import matplotlib as mpl
-import matplotlib.pylab as plt
+#import matplotlib as mpl
+#import matplotlib.pylab as plt
+import matplotlib.pyplot as plt
 
 
 def draw_rate(chg_rate, curr):
     x_axis_year = []
     y_axis_rate = []
 
-    print(curr)
+    title = ""
 
     for k, v in chg_rate.items():
-        x_axis_year.append(k)
-        y_axis_rate.append(v)
+        x_axis_year.append(k[6:8])
+        y_axis_rate.append(float(v.replace(",", "")))
+        title = k[0:6]
 
     print(x_axis_year, y_axis_rate)
-    plt.title(curr)
+    plt.grid(True)
+    plt.title(title[0:4]+' year '+title[4:6]+'Month, '+curr)
     plt.plot(x_axis_year, y_axis_rate, 'rs--')
-    plt.savefig('./tempimg/' + 'aaa' + '.png', format='png')
+    plt.savefig('temp_img/'+'aaa.png')
+    #plt.savefig()
 
 
 def draw_rate2(chg_rate, curr):
@@ -75,7 +79,7 @@ def get_chg_rate(in_val):
 
     #print(rate_dict)
     #print(sorted(rate_dict))
-    #draw_rate(rate_dict, curr)
-    draw_rate2(rate_dict, curr)
+    draw_rate(rate_dict, curr)
+    #draw_rate2(rate_dict, curr)
 
     return rate_dict
