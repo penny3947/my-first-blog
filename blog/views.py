@@ -17,4 +17,4 @@ def rate_list(request):
 
     out_val = get_chg_rate(in_val)
 
-    return render(request, 'blog/rate_list.html', {})
+    return render(request, 'blog/rate_list.html', context={'yyyymmcur': out_val})

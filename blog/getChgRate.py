@@ -1,8 +1,5 @@
 import requests
 import datetime
-
-#import matplotlib as mpl
-#import matplotlib.pylab as plt
 import matplotlib.pyplot as plt
 
 
@@ -10,6 +7,8 @@ def draw_rate(chg_rate, curr):
     x_axis_year = []
     y_axis_rate = []
 
+    print("HERE")
+    print(x_axis_year, y_axis_rate)
     title = ""
 
     for k, v in chg_rate.items():
@@ -19,16 +18,10 @@ def draw_rate(chg_rate, curr):
 
     print(x_axis_year, y_axis_rate)
     plt.grid(True)
-    plt.title(title[0:4]+' year '+title[4:6]+'Month, '+curr)
+    plt.title('Year: '+title[0:4]+', Month, '+title[4:6]+", Currency: "+curr)
     plt.plot(x_axis_year, y_axis_rate, 'rs--')
-    plt.savefig('temp_img/'+'aaa.png')
-    #plt.savefig()
-
-
-def draw_rate2(chg_rate, curr):
-    plt.title("Plot")
-    plt.plot([1, 4, 9, 16])
-    plt.show()
+    plt.savefig('blog/static/img/'+title+curr+'.png')
+    plt.clf()
 
 
 def is_leap(target_year):     # 윤년 판단
@@ -58,7 +51,7 @@ def get_chg_rate(in_val):
     rate_dict = {}
 
     if not in_val or in_val["year"] == "0000":      # 초기값일 경우 아무처리 없이 바로 응답
-        return rate_dict
+        return "000000000"
 
     target_period = in_val["year"] + in_val["month"]
     curr = in_val["curr"]
@@ -77,9 +70,6 @@ def get_chg_rate(in_val):
             if rate['cur_unit'] == curr:
                 rate_dict[target_date] = rate['deal_bas_r']
 
-    #print(rate_dict)
-    #print(sorted(rate_dict))
     draw_rate(rate_dict, curr)
-    #draw_rate2(rate_dict, curr)
 
-    return rate_dict
+    return target_period+curr
