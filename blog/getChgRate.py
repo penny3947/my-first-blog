@@ -3,9 +3,11 @@ import datetime
 import matplotlib.pyplot as plt
 
 
-def draw_rate(chg_rate, curr):
+def draw_rate(chg_rate, rate_ttb, rate_tts, curr):
     x_axis_year = []
     y_axis_rate = []
+    y_axis_ttb = []
+    y_axis_tts = []
 
     print("HERE")
     print(x_axis_year, y_axis_rate)
@@ -16,11 +18,22 @@ def draw_rate(chg_rate, curr):
         y_axis_rate.append(float(v.replace(",", "")))
         title = k[0:6]
 
+    for k, v in rate_ttb.items():
+        y_axis_ttb.append(float(v.replace(",", "")))
+
+    for k, v in rate_tts.items():
+        y_axis_tts.append(float(v.replace(",", "")))
+
     print(x_axis_year, y_axis_rate)
     plt.grid(True)
-    plt.title('Year: '+title[0:4]+', Month, '+title[4:6]+", Currency: "+curr)
-    plt.plot(x_axis_year, y_axis_rate, 'rs--')
-    plt.savefig('blog/static/img/'+title+curr+'.png')
+    plt.title('Year: '+title[0:4]+', Month: '+title[4:6]+", Currency: "+curr)
+    plt.xlabel("Day")
+    plt.ylabel("Won")
+    plt.plot(x_axis_year, y_axis_rate, 'rs--', label = 'Basic rate')
+    plt.plot(x_axis_year, y_axis_ttb, '-', label = 'Receiving rate')
+    plt.plot(x_axis_year, y_axis_tts, '-', label = 'Sending rate')
+    plt.legend()
+    plt.savefig('blog/static/img/'+title+curr+'.png', dpi=300)
     plt.clf()
 
 
@@ -49,6 +62,9 @@ def get_chg_rate(in_val):
     url = 'https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?data=AP01&authkey='
     APIkey = 'a6w51v3PEJEhlv2BeW6iXpTfSBygESpB'
     rate_dict = {}
+    rate_ttb = {}
+    rate_tts = {}
+
 
     if not in_val or in_val["year"] == "0000":      # 초기값일 경우 아무처리 없이 바로 응답
         return "000000000"
@@ -69,7 +85,9 @@ def get_chg_rate(in_val):
 
             if rate['cur_unit'] == curr:
                 rate_dict[target_date] = rate['deal_bas_r']
+                rate_ttb[target_date] = rate['ttb']
+                rate_tts[target_date] = rate['tts']
 
-    draw_rate(rate_dict, curr)
+    draw_rate(rate_dict, rate_ttb, rate_tts, curr)
 
     return target_period+curr
