@@ -15,10 +15,21 @@
         <form action="" method="POST" >{% csrf_token %}
             {{ form }}
             <ul class="filter-row">
-                <li>
-                    <label for="years">조회연도</label>
-                    <div class="filter-list" style="width: 125px;">
-                        <select name="years" id="years">
+                <table>
+                    <tr>
+                        <td width="100px">
+                            <label for="years">조회연도</label>
+                        </td>
+                        <td width="100px">
+                            <label for="months">조회월</label>
+                        </td>
+                        <td width="100px">
+                            <label for="curr">통화</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select name="years" id="years">
                             <option value="0000" disabled selected>선택하세요</option>
                             <option value="2019">2019</option>
                             <option value="2018">2018</option>
@@ -30,13 +41,9 @@
                             <option value="2012">2012</option>
                             <option value="2011">2011</option>
                             <option value="2010">2010</option>
-                        </select>
-                    </div>
-                </li>
-                <li>
-                    <label for="months">조회월</label>
-                    <div class="filter-list" style="width: 125px;">
-                        <select name="months" id="months">
+                        </td>
+                        <td>
+                            <select name="months" id="months">
                             <option value="00" disabled selected>선택하세요</option>
                             <option value="01">1</option>
                             <option value="02">2</option>
@@ -50,23 +57,23 @@
                             <option value="10">10</option>
                             <option value="10">11</option>
                             <option value="10">12</option>
-                        </select>
-                    </div>
-                </li>
-                <li>
-                    <label for="curr">통화</label>
-                    <div class="filter-list" style="width: 125px;">
-                        <select name="curr" id="curr">
+                            </select>
+                        </td>
+                        <td>
+                            <select name="curr" id="curr">
                             <option value="00" disabled selected>선택하세요</option>
                             <option value="EUR">EUR</option>
                             <option value="JPY(100)">JPY</option>
                             <option value="KRW">KRW</option>
                             <option value="USD">USD</option>
                             <option value="GBP">GBP</option>
-                        </select>
-                    </div>
-                </li>
-                <input type='submit' value="조회">
+                            </select>
+                        </td>
+                        <td>
+                            <input type='submit' value="조회">
+                        </td>
+                    </tr>
+                </table>
             </ul>
         </form>
     </div>
